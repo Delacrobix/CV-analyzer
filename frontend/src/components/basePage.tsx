@@ -3,14 +3,14 @@ import NavbarMenu from "./navbar";
 import CustomFooter from "./footer";
 
 interface BasePageProps {
-  Children: React.ReactNode;
+  children: React.ReactNode;
 }
 
-export default function BasePage({ Children }: Readonly<BasePageProps>) {
+export default function BasePage({ children }: Readonly<BasePageProps>) {
   return (
     <div className='h-[100vh]'>
       <NavbarMenu title='CV Analyzer' />
-      {Children}
+      {children}
       <CustomFooter />
     </div>
   );

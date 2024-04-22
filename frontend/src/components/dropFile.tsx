@@ -20,14 +20,14 @@ export default function DropFile() {
     if (!isValidSize(file)) return;
     if (!isValidType(file)) return;
 
-    (async () => {
-      try {
-        const fileContent = await readFileContent(file);
-      } catch (e) {
-        console.error("Error reading file content: ", e);
-        getToastError();
-      }
-    })();
+    // (async () => {
+    //   try {
+    //     const fileContent = await readFileContent(file);
+    //   } catch (e) {
+    //     console.error("Error reading file content: ", e);
+    //     getToastError();
+    //   }
+    // })();
   }, [acceptedFiles]);
 
   function isValidSize(file: File) {
@@ -84,10 +84,10 @@ export default function DropFile() {
   }
 
   return (
-    <>
+    <div className='border border-dashed border-gray-400 p-10 rounded-lg w-[70%]'>
       <div
         {...getRootProps()}
-        className='border border-dashed border-gray-400 p-4 rounded-lg text-center cursor-pointer '>
+        className='border border-dashed border-gray-400 py-16 px-24 rounded-lg text-center cursor-pointer '>
         <input {...getInputProps()} />
         <p className='text-gray-600'>
           Drag 'n' drop some files here, or click to select files
@@ -96,10 +96,11 @@ export default function DropFile() {
       <aside>
         <ul>
           <li className='pl-1 text-gray-500 text-[13px]'>
-            Files must be less than 1MB and of type CSS, HTML, TSX or JSX.
+            Files must be less than 2MB and of type PDF, docx, odt or image
+            (JPG, JPEG and PNG).
           </li>
         </ul>
       </aside>
-    </>
+    </div>
   );
 }

@@ -1,10 +1,17 @@
-import React from "react";
+// import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import BasePage from "./components/basePage";
-import Main from "./pages/main";
+import Main from "./pages/index";
 
 function App() {
-  return <BasePage Children={<Main />} />;
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' element={<BasePage>{<Main />}</BasePage>} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
