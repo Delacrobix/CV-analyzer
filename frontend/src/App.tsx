@@ -2,13 +2,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import BasePage from "./components/basePage";
-import Main from "./pages/index";
+import Index from "./pages/index";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<BasePage>{<Main />}</BasePage>} />
+        <Route path='/' element={<BasePage>{<Index />}</BasePage>} />
       </Routes>
     </Router>
   );

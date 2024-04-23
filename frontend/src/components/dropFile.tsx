@@ -2,10 +2,12 @@ import React from "react";
 import { useDropzone } from "react-dropzone";
 
 import useErrorToasts from "../hooks/useErrorToasts";
+import { useGlobalStateVariables } from "../state/globalVariablesState";
 
 export default function DropFile() {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
   const { getToastWarning, getToastError } = useErrorToasts();
+  const { setFileContent } = useGlobalStateVariables();
 
   React.useEffect(() => {
     if (acceptedFiles.length === 0) return;
@@ -20,20 +22,22 @@ export default function DropFile() {
     if (!isValidSize(file)) return;
     if (!isValidType(file)) return;
 
-    // (async () => {
-    //   try {
-    //     const fileContent = await readFileContent(file);
-    //   } catch (e) {
-    //     console.error("Error reading file content: ", e);
-    //     getToastError();
-    //   }
-    // })();
+    (async () => {
+      try {
+        const fileContent = await readFileContent(file);
+
+        setFileContent({ base64: fileContent, type: file.type });
+      } catch (e) {
+        console.error("Error reading file content: ", e);
+        getToastError();
+      }
+    })();
   }, [acceptedFiles]);
 
   function isValidSize(file: File) {
-    if (file.size > 1000000) {
+    if (file.size > 2000000) {
       getToastWarning(
-        "The file is too big! Please select a file less than 1MB."
+        "The file is too big! Please select a file less than 2MB."
       );
 
       return false;
@@ -43,40 +47,40 @@ export default function DropFile() {
   }
 
   function readFileContent(file: File) {
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
 
-      reader.onload = handleFileLoad;
-      reader.onerror = handleError;
-      reader.readAsText(file);
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        const base64Content = base64String.replace(/^data:[^;]+;base64,/, "");
+        resolve(base64Content);
+      };
 
-      function handleFileLoad(event: ProgressEvent<FileReader>) {
-        const contents = event?.target?.result;
-        resolve(contents);
-      }
+      reader.onerror = () => {
+        reject(new Error("Error reading file content!"));
+      };
 
-      function handleError(error: ProgressEvent<FileReader>) {
-        reject(error);
-      }
+      reader.readAsDataURL(file);
     });
   }
 
   function isValidType(file: File) {
-    const validTypes = [
-      "text/css",
-      "text/html",
-      "application/x-tiled-tsx",
-      "text/javascript",
-      "application/javascript",
-      "application/jsx",
-      "text/jsx",
+    const validImageTypes = ["image/jpeg", "image/jpg", "image/png"];
+    const validDocumentTypes = [
+      "application/pdf",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.oasis.opendocument.text",
     ];
 
-    if (!validTypes.includes(file.type)) {
+    if (
+      !(
+        validImageTypes.includes(file.type) ||
+        validDocumentTypes.includes(file.type)
+      )
+    ) {
       getToastWarning(
-        "The file type is not supported! Please select a CSS, HTML, TSX or JSX file."
+        "The file type is not supported! Please select an image (JPEG, JPG, PNG), PDF, DOCX, or ODT file."
       );
-
       return false;
     }
 
