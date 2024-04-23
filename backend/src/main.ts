@@ -1,10 +1,15 @@
 import { NestFactory } from '@nestjs/core';
-import { AnalyzerModule } from './cv-analyzer/analyzer.module';
 import * as dotenv from 'dotenv';
+import * as bodyParser from 'body-parser';
+
+import { AnalyzerModule } from './cv-analyzer/analyzer.module';
 
 async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AnalyzerModule);
+
+  app.use(bodyParser.json({ limit: '2mb' }));
+  app.use(bodyParser.urlencoded({ limit: '2mb', extended: true }));
 
   app.enableCors({
     origin: '*',

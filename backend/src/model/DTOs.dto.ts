@@ -1,9 +1,13 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class GetInputDTO {
+export class GetInputBase64DataDTO {
   @IsString()
   @IsNotEmpty()
-  message: string;
+  base64: string;
+
+  @IsString()
+  @IsNotEmpty()
+  type: string;
 }
 
 export class GetOpenAIAnswerOutputDTO {
