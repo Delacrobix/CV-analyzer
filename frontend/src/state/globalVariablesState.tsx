@@ -8,6 +8,8 @@ interface GlobalStateChildrenType {
 interface GlobalStateType {
   fileContent: FileData;
   setFileContent: React.Dispatch<React.SetStateAction<FileData | null>>;
+  analysisResult: string;
+  setAnalysisResult: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export const GlobalStateContext = React.createContext<GlobalStateType | null>(
@@ -18,10 +20,19 @@ export function GlobalStateProvider({
   children,
 }: Readonly<GlobalStateChildrenType>) {
   const [fileContent, setFileContent] = React.useState<FileData | null>(null);
+  const [analysisResult, setAnalysisResult] = React.useState<string | null>(
+    null
+  );
 
   const globalState = React.useMemo(
-    () => ({ fileContent, setFileContent } as GlobalStateType),
-    [fileContent, setFileContent]
+    () =>
+      ({
+        fileContent,
+        setFileContent,
+        analysisResult,
+        setAnalysisResult,
+      } as GlobalStateType),
+    [fileContent, setFileContent, analysisResult, setAnalysisResult]
   );
 
   return (

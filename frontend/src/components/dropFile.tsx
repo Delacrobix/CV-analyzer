@@ -66,11 +66,7 @@ export default function DropFile() {
 
   function isValidType(file: File) {
     const validImageTypes = ["image/jpeg", "image/jpg", "image/png"];
-    const validDocumentTypes = [
-      "application/pdf",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "application/vnd.oasis.opendocument.text",
-    ];
+    const validDocumentTypes = ["application/pdf"];
 
     if (
       !(
@@ -94,7 +90,7 @@ export default function DropFile() {
         className='border border-dashed border-gray-400 py-16 px-24 rounded-lg text-center cursor-pointer '>
         <input {...getInputProps()} />
         <p className='text-gray-600'>
-          Drag 'n' drop some files here, or click to select files
+          Drag 'n' drop some file here, or click to select files
         </p>
       </div>
       <aside>
