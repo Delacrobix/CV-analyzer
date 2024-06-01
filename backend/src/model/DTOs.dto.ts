@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class GetInputBase64DataDTO {
+export class GetInputFileDataDTO {
   @IsString()
   @IsNotEmpty()
   base64: string;
@@ -13,11 +13,11 @@ export class GetInputBase64DataDTO {
 export class GetOpenAIAnswerOutputDTO {
   @IsString()
   @IsNotEmpty()
-  aiMessage: string;
+  aiResponse: string;
 
-  static getInstance(aiMessage: string) {
+  static getInstance(aiResponse: string) {
     const dto = new GetOpenAIAnswerOutputDTO();
-    dto.aiMessage = aiMessage;
+    dto.aiResponse = aiResponse;
     return dto;
   }
 }
