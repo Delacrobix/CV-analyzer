@@ -14,7 +14,7 @@ export class AnalyzerController {
   }
 
   // TODO: change name of this endpoint for something more meaningful
-  @Post('ocr')
+  @Post('cv-analysis')
   async OCRimage(
     @Body(new ValidationPipe({ transform: true })) data: GetInputFileDataDTO,
   ) {
