@@ -1,34 +1,55 @@
 import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
+
 import { AnalyzerService } from './analyzer.service';
-import { GetInputBase64DataDTO } from 'src/model/DTOs.dto';
+import { GetInputFileDataDTO } from 'src/model/DTOs.dto';
+import { getOrganizePrompt } from 'src/utils/prompts';
 
 @Controller('analyzer')
 export class AnalyzerController {
   constructor(private readonly service: AnalyzerService) {}
 
-  @Get('hello')
+  @Get('health')
   getHello(): string {
-    return 'Hello World!';
+    return 'OK';
   }
 
+  // TODO: change name of this endpoint for something more meaningful
   @Post('ocr')
   async OCRimage(
-    @Body(new ValidationPipe({ transform: true })) data: GetInputBase64DataDTO,
+    @Body(new ValidationPipe({ transform: true })) data: GetInputFileDataDTO,
   ) {
     try {
       const dataUrl = this.service.buildDataUrl(data.type, data.base64);
-      let dataText = '';
-      for (let i = 0; i < 70; i++) {
-        dataText += dataUrl[i];
+
+      let imgs = [];
+
+      if (data.type === 'application/pdf') {
+        imgs = await this.service.convertPdfToImages(dataUrl);
       }
 
-      console.log('dataText: ', dataText);
+      if (
+        data.type === 'image/jpeg' ||
+        data.type === 'image/jpg' ||
+        data.type === 'image/png'
+      ) {
+        imgs.push(dataUrl);
+      }
 
-      const res = await this.service.OCRimage(dataUrl);
+      const scansPromises = imgs.map(async (img) => {
+        return new Promise((resolve) => {
+          const res = this.service.OCRimage(img);
 
-      console.log('res: ', res);
+          resolve(res);
+        });
+      });
 
-      return res;
+      const scansText = await Promise.all(scansPromises);
+      const organizedText = scansText.join(' ');
+
+      const prompt = getOrganizePrompt(organizedText);
+      const cvAnalysis = await this.service.getAIResponse(prompt);
+
+      return cvAnalysis;
     } catch (e) {
       throw new Error(e);
     }
