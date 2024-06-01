@@ -24,7 +24,7 @@ export default function Index() {
     (async () => {
       await sendRequest({
         method: "POST",
-        url: `${VITE_SERVER_URL}/analyzer/ocr`,
+        url: `${VITE_SERVER_URL}/analyzer/cv-analysis`,
         data: fileContent,
         headers: {
           "Content-Type": "application/json",
