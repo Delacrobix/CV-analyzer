@@ -1,15 +1,18 @@
 import React from "react";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { OCRAnalysisResponse } from "../utils/types";
 
 type UseRequests<T, U> = {
-  data: T | U | null;
+  data: T | U | OCRAnalysisResponse | null;
   loading: boolean;
   error: Error | null;
   sendRequest: (config: AxiosRequestConfig) => Promise<void>;
 };
 
 export default function useRequests<T, U = unknown>(): UseRequests<T, U> {
-  const [data, setData] = React.useState<T | U | null>(null);
+  const [data, setData] = React.useState<T | U | OCRAnalysisResponse | null>(
+    null
+  );
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<Error | null>(null);
 

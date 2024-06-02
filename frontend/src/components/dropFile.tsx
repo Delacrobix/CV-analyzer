@@ -1,6 +1,7 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
+import { readFileContent } from "../utils/functions";
 import useErrorToasts from "../hooks/useErrorToasts";
 import { useGlobalStateVariables } from "../state/globalVariablesState";
 
@@ -44,24 +45,6 @@ export default function DropFile() {
     }
 
     return true;
-  }
-
-  function readFileContent(file: File) {
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        const base64String = reader.result as string;
-        const base64Content = base64String.replace(/^data:[^;]+;base64,/, "");
-        resolve(base64Content);
-      };
-
-      reader.onerror = () => {
-        reject(new Error("Error reading file content!"));
-      };
-
-      reader.readAsDataURL(file);
-    });
   }
 
   function isValidType(file: File) {

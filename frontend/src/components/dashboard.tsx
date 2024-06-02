@@ -1,12 +1,8 @@
 import React from "react";
-import { CvAnalysisResponse } from "../utils/types";
-
-type Data = {
-  aiResponse: string;
-};
+import { CvAnalysisResponse, OCRAnalysisResponse } from "../utils/types";
 
 interface DashboardProps {
-  data: Data | null;
+  data: OCRAnalysisResponse | null;
 }
 
 export default function Dashboard({ data }: Readonly<DashboardProps>) {
@@ -17,7 +13,13 @@ export default function Dashboard({ data }: Readonly<DashboardProps>) {
   React.useEffect(() => {
     if (!data) return;
 
-    setJsonData(JSON.parse(data.aiResponse));
+    try {
+      const parsedData = JSON.parse(data.aiResponse);
+
+      setJsonData(parsedData as CvAnalysisResponse);
+    } catch (e) {
+      console.error("Error parsing data: ", e);
+    }
   }, [data]);
 
   React.useEffect(() => {

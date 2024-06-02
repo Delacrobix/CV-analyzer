@@ -3,6 +3,10 @@ export interface FileData {
   base64: string;
 }
 
+export interface OCRAnalysisResponse {
+  aiResponse: string;
+}
+
 export interface CvAnalysisResponse {
   name?: string;
   title?: string;

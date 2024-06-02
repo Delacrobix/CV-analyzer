@@ -1,4 +1,6 @@
 import React from "react";
+
+import { OCRAnalysisResponse } from "../utils/types";
 import { FileData } from "../utils/types";
 
 interface GlobalStateChildrenType {
@@ -8,8 +10,10 @@ interface GlobalStateChildrenType {
 interface GlobalStateType {
   fileContent: FileData;
   setFileContent: React.Dispatch<React.SetStateAction<FileData | null>>;
-  analysisResult: string;
-  setAnalysisResult: React.Dispatch<React.SetStateAction<string | null>>;
+  analysisResult: OCRAnalysisResponse;
+  setAnalysisResult: React.Dispatch<
+    React.SetStateAction<OCRAnalysisResponse | null>
+  >;
 }
 
 export const GlobalStateContext = React.createContext<GlobalStateType | null>(
@@ -20,9 +24,8 @@ export function GlobalStateProvider({
   children,
 }: Readonly<GlobalStateChildrenType>) {
   const [fileContent, setFileContent] = React.useState<FileData | null>(null);
-  const [analysisResult, setAnalysisResult] = React.useState<string | null>(
-    null
-  );
+  const [analysisResult, setAnalysisResult] =
+    React.useState<OCRAnalysisResponse | null>(null);
 
   const globalState = React.useMemo(
     () =>
