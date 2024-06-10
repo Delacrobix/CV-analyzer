@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import BasePage from "./components/basePage";
 import Index from "./pages/index";
@@ -10,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<BasePage>{<Index />}</BasePage>} />
         <Route path='/analysis' element={<BasePage>{<Analysis />}</BasePage>} />
+        <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </Router>
   );
