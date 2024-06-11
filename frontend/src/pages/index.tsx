@@ -84,7 +84,7 @@ export default function Index() {
   }
 
   return (
-    <div className='h-full'>
+    <div className='h-[87vh]'>
       <div className='h-full flex flex-col justify-center items-center'>
         {loading ? (
           <ClipLoader color={purpureColor} />

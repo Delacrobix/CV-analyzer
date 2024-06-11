@@ -3,7 +3,7 @@ import { Link } from "@nextui-org/react";
 
 export default function CustomFooter() {
   return (
-    <footer className='grid grid-cols-3 items-center justify-center bg-black p-4'>
+    <footer className='grid grid-cols-3 items-center justify-center bg-black p-4 mt-4'>
       <div className='flex justify-center'>
         <p className=' font-bold '>CSS Tailwind converter</p>
       </div>
