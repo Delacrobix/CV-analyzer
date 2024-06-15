@@ -1,7 +1,6 @@
 import React from "react";
 
-import { OCRAnalysisResponse } from "../utils/types";
-import { FileData } from "../utils/types";
+import { OCRAnalysisResponse, FileData } from "../utils/types";
 
 interface GlobalStateChildrenType {
   children: React.ReactNode;
