@@ -50,7 +50,7 @@ export function getOrganizePrompt(information: string) {
         "description": "Studied business administration at Harvard"
       }
     ],
-    "curses": [
+    "courses": [
       {
         "name": "React",
         "date": "2020",
