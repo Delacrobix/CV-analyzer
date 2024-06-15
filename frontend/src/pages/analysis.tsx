@@ -16,7 +16,7 @@ export default function Analysis() {
 
   return (
     <div className='h-full'>
-      <Dashboard data={data} />
+      <Dashboard cvAnalysisDataString={data} />
     </div>
   );
 }
