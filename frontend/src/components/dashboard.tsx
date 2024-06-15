@@ -72,6 +72,7 @@ function ProgressBar({ barValue }: Readonly<ProgressBarProps>) {
   );
 }
 
+// TODO: Remove this in production
 const testData = `{
   "cvScore": 80,
   "name": "John Doe",
