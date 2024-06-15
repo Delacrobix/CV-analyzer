@@ -17,7 +17,7 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Accept, Authorization, api-key',
   });
 
-  await app.listen(3000);
+  await app.listen(8200);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
