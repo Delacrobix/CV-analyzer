@@ -8,6 +8,7 @@ export interface OCRAnalysisResponse {
 }
 
 export interface CvAnalysisResponse {
+  cvScore?: number;
   name?: string;
   title?: string;
   contact?: {
@@ -18,6 +19,7 @@ export interface CvAnalysisResponse {
     phone?: string;
     others?: string[];
   };
+  possiblePositions?: string[];
   skills?: string[];
   softSkills?: string[];
   languages?: {
@@ -63,4 +65,5 @@ export interface CvAnalysisResponse {
     description?: string;
   }[];
   analysis?: string;
+  enhancement?: string;
 }
