@@ -5,7 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { useGlobalStateVariables } from "../state/globalVariablesState";
 import DropFile from "../components/dropFile";
 import useRequests from "../hooks/useRequests";
-import useErrorToasts from "../hooks/useErrorToasts";
+import useToasts from "../hooks/useToasts";
 import { Button } from "@nextui-org/react";
 import { readFileContent } from "../utils/functions";
 import { OCRAnalysisResponse } from "../utils/types";
@@ -17,7 +17,7 @@ const purpureColor = "#36d7b7";
 export default function Index() {
   const { fileContent, setAnalysisResult, setFileContent } =
     useGlobalStateVariables();
-  const { getToastError } = useErrorToasts();
+  const { getToastError } = useToasts();
   const { loading, sendRequest, error, data } = useRequests();
   const navigate = useNavigate();
 

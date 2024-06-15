@@ -2,12 +2,12 @@ import React from "react";
 import { useDropzone } from "react-dropzone";
 
 import { readFileContent } from "../utils/functions";
-import useErrorToasts from "../hooks/useErrorToasts";
+import useToasts from "../hooks/useToasts";
 import { useGlobalStateVariables } from "../state/globalVariablesState";
 
 export default function DropFile() {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
-  const { getToastWarning, getToastError } = useErrorToasts();
+  const { getToastWarning, getToastError } = useToasts();
   const { setFileContent } = useGlobalStateVariables();
 
   React.useEffect(() => {
