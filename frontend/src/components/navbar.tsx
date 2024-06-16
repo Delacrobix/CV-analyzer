@@ -28,7 +28,9 @@ export default function NavbarMenu({ title }: Readonly<NavbarMenuProps>) {
   return (
     <Navbar>
       <NavbarBrand>
-        <p className='font-bold text-inherit'>CV Analyzer</p>
+        <a className='font-bold text-inherit p-4 -ml-4' href='/'>
+          CV Analyzer
+        </a>
       </NavbarBrand>
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
         <NavbarItem>
