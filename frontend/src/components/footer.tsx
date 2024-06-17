@@ -1,9 +1,15 @@
-import React from "react";
 import { Link } from "@nextui-org/react";
 
+import { useTheme } from "../state/themeState";
+
 export default function CustomFooter() {
+  const { isDarkMode } = useTheme();
+
   return (
-    <footer className='grid grid-cols-3 items-center justify-center bg-black p-4 mt-4'>
+    <footer
+      className={`grid grid-cols-3 items-center justify-center ${
+        isDarkMode ? "bg-slate-900" : " bg-slate-300"
+      } p-4 mt-4`}>
       <div className='flex justify-center'>
         <p className=' font-bold '>CSS Tailwind converter</p>
       </div>

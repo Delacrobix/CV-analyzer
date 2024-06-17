@@ -1,4 +1,3 @@
-// import React from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -7,6 +6,9 @@ import {
 } from "@nextui-org/react";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import SwitchTheme from "./switchTheme";
+import { useTheme } from "../state/themeState";
+
 interface NavbarMenuProps {
   title: string;
 }
@@ -14,9 +16,10 @@ interface NavbarMenuProps {
 export default function NavbarMenu({ title }: Readonly<NavbarMenuProps>) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isDarkMode } = useTheme();
 
   function handleShowReturnButton() {
-    if (location.pathname === "/result") return true;
+    if (location.pathname === "/analysis") return true;
 
     return false;
   }
@@ -26,13 +29,13 @@ export default function NavbarMenu({ title }: Readonly<NavbarMenuProps>) {
   }
 
   return (
-    <Navbar>
+    <Navbar className={`${isDarkMode ? "bg-slate-900" : " bg-slate-300"}`}>
       <NavbarBrand>
         <a className='font-bold text-inherit p-4 -ml-4' href='/'>
           CV Analyzer
         </a>
       </NavbarBrand>
-      <NavbarContent className='hidden sm:flex gap-4' justify='center'>
+      <NavbarContent className='hidden sm:flex' justify='center'>
         <NavbarItem>
           <h1 className=' text-center text-3xl'>{title}</h1>
         </NavbarItem>
@@ -47,6 +50,11 @@ export default function NavbarMenu({ title }: Readonly<NavbarMenuProps>) {
             </button>
           </NavbarItem>
         )}
+        <div className='-mr-12 p-6'>
+          <NavbarItem>
+            <SwitchTheme />
+          </NavbarItem>
+        </div>
       </NavbarContent>
     </Navbar>
   );
