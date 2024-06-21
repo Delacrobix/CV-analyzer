@@ -64,7 +64,6 @@ export class AnalyzerService {
     return `data:${fileType};base64,${base64}`;
   }
 
-  // FIXME: This implementation could be fail if tow or more users try to convert pdf at the same time. For this case, I will use this will not used for a lot of users.
   async pdfBase64ToFile(
     base64Pdf: string,
     outDir: string,
