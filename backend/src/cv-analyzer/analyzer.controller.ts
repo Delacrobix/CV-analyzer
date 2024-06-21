@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Delete,
+  ValidationPipe,
+} from '@nestjs/common';
 
 import { AnalyzerService } from './analyzer.service';
 import { GetInputFileDataDTO } from 'src/model/DTOs.dto';
@@ -13,9 +20,8 @@ export class AnalyzerController {
     return 'OK';
   }
 
-  // TODO: change name of this endpoint for something more meaningful
   @Post('cv-analysis')
-  async OCRimage(
+  async cvOcrAndAnalysis(
     @Body(new ValidationPipe({ transform: true })) data: GetInputFileDataDTO,
   ) {
     try {
@@ -42,14 +48,27 @@ export class AnalyzerController {
           resolve(res);
         });
       });
+      console.log('Images OCR completed.');
 
       const scansText = await Promise.all(scansPromises);
       const organizedText = scansText.join(' ');
 
       const prompt = getOrganizePrompt(organizedText);
       const cvAnalysis = await this.service.getAIResponse(prompt);
+      console.log('AI response completed.');
 
       return cvAnalysis;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
+  @Delete('clean-files')
+  async cleanFilesFolder() {
+    try {
+      await this.service.cleanFilesFolder();
+
+      return 'Files cleaned.';
     } catch (e) {
       throw new Error(e);
     }

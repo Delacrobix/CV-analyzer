@@ -31,7 +31,8 @@
     "pdfjs-dist": "^4.1.392",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "tesseract.js": "^5.0.5"
+    "tesseract.js": "^5.0.5",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
