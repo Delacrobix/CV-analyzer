@@ -7,13 +7,13 @@ export default function CustomFooter() {
 
   return (
     <footer
-      className={`grid grid-cols-3 items-center justify-center ${
+      className={`sm:grid sm:grid-cols-3 items-center justify-center ${
         isDarkMode ? "bg-slate-900" : " bg-slate-300"
       } p-4 mt-4`}>
       <div className='flex justify-center'>
         <p className=' font-bold '>CV analyzer</p>
       </div>
-      <div className='flex justify-center'>
+      <div className='flex justify-center py-4 sm:py-0'>
         <p className=''>
           <span>Developed by</span>
           <span className=' font-bold'> Jeffrey Rerín</span>

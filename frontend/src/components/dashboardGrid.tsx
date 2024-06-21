@@ -66,7 +66,7 @@ export default function DashboardGrid({
           )}
           {haveItems(cvAnalysisData?.softSkills) && (
             <Col>
-              <div className=' flex justify-center '>
+              <div className=''>
                 <ItemsCard
                   title='Soft skills'
                   itemsArr={cvAnalysisData?.softSkills}

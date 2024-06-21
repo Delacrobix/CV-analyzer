@@ -70,7 +70,7 @@ export default function DropFile() {
     <div className='border border-dashed border-gray-400 p-10 rounded-lg w-[70%]'>
       <div
         {...getRootProps()}
-        className='border border-dashed border-gray-400 py-16 px-24 rounded-lg text-center cursor-pointer '>
+        className='border border-dashed border-gray-400 py-16 px-2 md:px-24 rounded-lg text-center cursor-pointer '>
         <input {...getInputProps()} />
         <p className='text-gray-600'>
           Drag 'n' drop some file here, or click to select files

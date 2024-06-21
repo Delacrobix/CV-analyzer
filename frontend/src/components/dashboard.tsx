@@ -22,8 +22,8 @@ export default function Dashboard({
     if (!cvAnalysisDataString) return;
 
     try {
-      const parsedData = JSON.parse(cvAnalysisDataString.aiResponse);
-      // const parsedData = JSON.parse(testData);
+      // const parsedData = JSON.parse(cvAnalysisDataString.aiResponse);
+      const parsedData = JSON.parse(testData);
 
       setJsonData(parsedData as CvAnalysisResponse);
     } catch (e) {
@@ -44,7 +44,9 @@ export default function Dashboard({
       </p>
       <div className='flex flex-col justify-center items-center mt-6'>
         <h3 className='text-center font-mono font-bold'>CV SCORE</h3>
-        <ProgressBar barValue={jsonData?.cvScore} />
+        <div className='w-full flex justify-center px-4 sm:px-0'>
+          <ProgressBar barValue={jsonData?.cvScore} />
+        </div>
       </div>
       <div className=''>
         <DashboardGrid cvAnalysisData={jsonData} />
