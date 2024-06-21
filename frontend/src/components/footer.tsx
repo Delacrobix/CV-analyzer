@@ -11,7 +11,7 @@ export default function CustomFooter() {
         isDarkMode ? "bg-slate-900" : " bg-slate-300"
       } p-4 mt-4`}>
       <div className='flex justify-center'>
-        <p className=' font-bold '>CSS Tailwind converter</p>
+        <p className=' font-bold '>CV analyzer</p>
       </div>
       <div className='flex justify-center'>
         <p className=''>
