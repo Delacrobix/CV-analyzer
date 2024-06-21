@@ -22,8 +22,8 @@ export default function Dashboard({
     if (!cvAnalysisDataString) return;
 
     try {
-      // const parsedData = JSON.parse(cvAnalysisDataString.aiResponse);
-      const parsedData = JSON.parse(testData);
+      const parsedData = JSON.parse(cvAnalysisDataString.aiResponse);
+      // const parsedData = JSON.parse(testData);
 
       setJsonData(parsedData as CvAnalysisResponse);
     } catch (e) {
@@ -31,11 +31,6 @@ export default function Dashboard({
       console.error("Error parsing data: ", e);
     }
   }, [cvAnalysisDataString]);
-
-  React.useEffect(() => {
-    if (!jsonData) return;
-    console.log("Json data: ", jsonData);
-  }, [jsonData]);
 
   return (
     <div className=' my-8 space-y-8'>
