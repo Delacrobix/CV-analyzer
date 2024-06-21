@@ -16,7 +16,7 @@ export default function BasePage({ children }: Readonly<BasePageProps>) {
       className={`${
         isDarkMode ? "dark text-foreground bg-background" : ""
       } h-full`}>
-      <NavbarMenu title='CV Analyzer' />
+      <NavbarMenu />
       {children}
       <CustomFooter />
     </div>

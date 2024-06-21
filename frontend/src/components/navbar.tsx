@@ -9,16 +9,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import SwitchTheme from "./switchTheme";
 import { useTheme } from "../state/themeState";
 
-interface NavbarMenuProps {
-  title: string;
-}
-
-export default function NavbarMenu({ title }: Readonly<NavbarMenuProps>) {
+export default function NavbarMenu() {
   const navigate = useNavigate();
   const location = useLocation();
   const { isDarkMode } = useTheme();
 
-  function handleShowReturnButton() {
+  function isInAnalysisRoute() {
     if (location.pathname === "/analysis") return true;
 
     return false;
@@ -37,11 +33,13 @@ export default function NavbarMenu({ title }: Readonly<NavbarMenuProps>) {
       </NavbarBrand>
       <NavbarContent className='hidden sm:flex' justify='center'>
         <NavbarItem>
-          <h1 className=' text-center text-3xl'>{title}</h1>
+          <h1 className=' text-center text-3xl'>
+            {!isInAnalysisRoute() ? "Upload CV" : "Analysis"}
+          </h1>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end'>
-        {handleShowReturnButton() && (
+        {isInAnalysisRoute() && (
           <NavbarItem>
             <button
               className=' bg-transparent text-blue-500'
