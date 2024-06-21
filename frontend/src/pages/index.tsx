@@ -35,6 +35,8 @@ export default function Index() {
         },
       });
     })();
+
+    setFileContent(null);
   }, [fileContent]);
 
   React.useEffect(() => {
