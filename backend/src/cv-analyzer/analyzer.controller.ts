@@ -11,15 +11,28 @@ import { AnalyzerService } from './analyzer.service';
 import { GetInputFileDataDTO } from 'src/model/DTOs.dto';
 import { getOrganizePrompt } from 'src/utils/prompts';
 
+/**
+ * Controller for the 'analyzer' endpoint.
+ */
 @Controller('analyzer')
 export class AnalyzerController {
   constructor(private readonly service: AnalyzerService) {}
 
+  /**
+   * GET request handler for the 'health' endpoint.
+   * @returns A string indicating the health status.
+   */
   @Get('health')
   getHello(): string {
     return 'OK';
   }
 
+  /**
+   * POST request handler for the 'cv-analysis' endpoint.
+   * @param data - The request body containing the data for CV analysis.
+   * @returns The analysis result of the CV.
+   * @throws Error if an error occurs during the analysis process.
+   */
   @Post('cv-analysis')
   async cvOcrAndAnalysis(
     @Body(new ValidationPipe({ transform: true })) data: GetInputFileDataDTO,
@@ -63,6 +76,11 @@ export class AnalyzerController {
     }
   }
 
+  /**
+   * DELETE request handler for the 'clean-files' endpoint.
+   * @returns A string indicating the result of the file cleaning process.
+   * @throws Error if an error occurs during the file cleaning process.
+   */
   @Delete('clean-files')
   async cleanFilesFolder() {
     try {
