@@ -5,6 +5,8 @@ import * as bodyParser from 'body-parser';
 import { AnalyzerModule } from './cv-analyzer/analyzer.module';
 
 async function bootstrap() {
+  const PORT = process.env.PORT;
+
   dotenv.config();
   const app = await NestFactory.create(AnalyzerModule);
 
@@ -17,7 +19,7 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Accept, Authorization, api-key',
   });
 
-  await app.listen(8200);
+  await app.listen(PORT);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
