@@ -55,7 +55,7 @@ export default function Index() {
   }, [data]);
 
   async function loadCustomExample() {
-    const filePath = "src/assets/cv-example.png";
+    const filePath = new URL("../assets/cv-example.png", import.meta.url).href;
 
     let content = "";
 
